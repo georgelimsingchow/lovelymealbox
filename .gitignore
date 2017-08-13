@@ -1,6 +1,6 @@
 .DS_Store
 
-live_config/
+live_config/*
 
 application/cache/*
 !application/cache/index.html
