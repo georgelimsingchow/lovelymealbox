@@ -37,13 +37,15 @@
                     </tr>
                     <?php foreach ($customer_data as $key => $value) { ?>
                     <tr>
-                      <td><?php echo $key+1;?>.</td>
-                      <td><?php echo $value['first_name']." ".$value['last_name'];?></td>
-                      <td>RM <?php echo $value['total_amount'] ? $value['total_amount'] : '0.00'; ?></td>
-                      <td>RM <?php echo $value['amount_left'] ? $value['amount_left'] : '0.00'; ?></td>
+                      <td><?= $key+1;?>.</td>
+                      <td><?= $value['first_name']." ".$value['last_name'];?></td>
+                      <td>RM <?= $value['total_amount'] ? $value['total_amount'] : '0.00'; ?></td>
+                      <td>RM <?= $value['amount_left'] ? $value['amount_left'] : '0.00'; ?></td>
                       
-                      <td><?php echo $value['create_date'];?></td>
-                      <td class="text-center"><a href="<?php echo base_url();?>superadmin/reload/add_balance/<?php echo $value['customer_id'];?>"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
+                      <td><?= $value['create_date'];?></td>
+                      <td class="text-center">
+                        <a href="<?= base_url();?>superadmin/reload/add_balance?customer_id=<?= $value['customer_id'];?>"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                        </a></td>
                     </tr>                 	
                     <?php }?>
                   </tbody></table>

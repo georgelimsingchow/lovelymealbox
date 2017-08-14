@@ -6,6 +6,7 @@ class Reload extends Admin_Controller
 	{
 		parent::__construct();
 		$this->load->library('form_validation'); 
+		$this->load->model('reload/reload_mdl', 'reload');
 	}
 
 	public function index()
@@ -17,14 +18,15 @@ class Reload extends Admin_Controller
 		$this->templates->admin($data);
 	}
 
-	public function add_balance($customer_id)
+	public function add_balance()
 	{
 		$submit = $this->input->post('submit',TRUE);
+		
+		$customer_id = $this->input->get('customer_id');
 
-		if ($submit == 'submit') {
 
-			$this->form_validation->set_rules('amount', 'Reload amount', 'required|is_numeric');
-			$this->form_validation->set_rules('description', 'Description', 'required');
+		$this->form_validation->set_rules('amount', 'Reload amount', 'required|is_numeric');
+		$this->form_validation->set_rules('description', 'Description', 'required');
 
 			if ($this->form_validation->run() == TRUE){
 				$insert_data = $this->reload_fetch_from_post();
@@ -34,28 +36,23 @@ class Reload extends Admin_Controller
 				
 
 			}else{
-				$this->_repeat_view($customer_id);	
+
+				$data['customer_reload']= $this->reload->get_total_reload($customer_id);
+				$data['customer_real_reload'] = $this->reload->get_total_real_reload($customer_id);
+				$data['customer_used']= $this->reload->get_total_used($customer_id);
+				$admin_id               = $this->session->admin_id;
+				$data['admin']    		= get_admin($admin_id);
+				$data['order']    		= $this->_getOrder($customer_id);
+				$data['customer_data']  = $this->_getSingleCustomer($customer_id);
+				$data['view_module']    = "superadmin";
+				$data['view_file']      = "reload_add_page";
+				$this->load->module("templates");
+				$this->templates->admin($data);	
 			}
-
-
-			
-		}else{
-			$this->_repeat_view($customer_id);			
-		}
 	
 	}
 
-	private function _repeat_view($customer_id)
-	{
-			$admin_id               = $this->session->admin_id;
-			$data['admin']    		= get_admin($admin_id);
-			$data['order']    		= $this->_getOrder($customer_id);
-			$data['customer_data']  = $this->_getSingleCustomer($customer_id);
-			$data['view_module']    = "superadmin";
-			$data['view_file']      = "reload_add_page";
-			$this->load->module("templates");
-			$this->templates->admin($data);			
-	}
+
 
 	private function _getOrder($customer_id)
 	{

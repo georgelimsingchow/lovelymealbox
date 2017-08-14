@@ -45,21 +45,38 @@ class Reload_mdl extends CI_Model {
 		return $data['total'];		
 	}
 
-	function get_remaining($customer_id)
+	function get_total_real_reload($customer_id)
 	{
 		$table = $this->get_table();
 		$data = array();
 
-		$this->db->select_sum('amount');
+		$this->db->select('SUM(real_amount) as total');
 		$this->db->from($table);
 		$this->db->where("customer_id", $customer_id);
+		$this->db->where("order_id", '0');
 		$query = $this->db->get();
 
 		foreach ($query->result_array() as $row) {
 			$data = $row;
 		}
+		return $data['total'];		
+	}
 
-		return $data['amount'];		
+	function get_total_used($customer_id)
+	{
+		$table = $this->get_table();
+		$data = array();
+
+		$this->db->select('SUM(amount) as spent');
+		$this->db->from($table);
+		$this->db->where("customer_id", $customer_id);
+		$this->db->where("admin_id", '0');
+		$query = $this->db->get();
+
+		foreach ($query->result_array() as $row) {
+			$data = $row;
+		}
+		return $data['spent'];			
 	}
 
 }

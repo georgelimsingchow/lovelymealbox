@@ -12,6 +12,60 @@
 
         <!-- Main content -->
         <section class="content">
+<div class="row">
+            <div class="col-lg-3 col-xs-6">
+              <!-- small box -->
+              <div class="small-box bg-aqua">
+                <div class="inner">
+                  <h3><?= $customer_reload;?></h3>
+                  <p>Total Reload</p>
+                </div>
+                <div class="icon">
+                  <i class="ion ion-bag"></i>
+                </div>
+                <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+              </div>
+            </div><!-- ./col -->
+            <div class="col-lg-3 col-xs-6">
+              <!-- small box -->
+              <div class="small-box bg-green">
+                <div class="inner">
+                  <h3><?= $customer_real_reload;?></h3>
+                  <p>Total Real Reload</p>
+                </div>
+                <div class="icon">
+                  <i class="ion ion-stats-bars"></i>
+                </div>
+                <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+              </div>
+            </div><!-- ./col -->
+            <div class="col-lg-3 col-xs-6">
+              <!-- small box -->
+              <div class="small-box bg-yellow">
+                <div class="inner">
+                  <h3><?= $customer_used;?></h3>
+                  <p>Total Used</p>
+                </div>
+                <div class="icon">
+                  <i class="ion ion-person-add"></i>
+                </div>
+                <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+              </div>
+            </div><!-- ./col -->
+            <div class="col-lg-3 col-xs-6">
+              <!-- small box -->
+              <div class="small-box bg-red">
+                <div class="inner">
+                  <h3>0</h3>
+                  <p>Dummy</p>
+                </div>
+                <div class="icon">
+                  <i class="ion ion-pie-graph"></i>
+                </div>
+                <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+              </div>
+            </div><!-- ./col -->
+          </div>
           <div class="row">
             <!-- left column -->
             <div class="col-md-12">
@@ -60,27 +114,31 @@
             <div class="col-md-12">
               <div class="box">
                 <div class="box-header with-border">
-                  <h3 class="box-title"><?php echo $customer_data['first_name']." ".$customer_data['last_name'];?>'s reload record</h3>
+                  <h3 class="box-title">
+                      <?= $customer_data['first_name']." ".$customer_data['last_name'];?>'s reload record
+                  </h3>
                 </div><!-- /.box-header -->
                 <div class="box-body">
                   <table class="table table-bordered">
                     <tbody><tr>
                       <th style="width: 10px">#</th>
                       <th>Reload Amount</th>
+                      <th>Description</th>
                       <th>Expire Date</th>
                       <th>Create Date</th>
                       <th>Reload By</th>
                     </tr>
-                    <?php foreach ($order as $key => $value) {?>
+                    <?php foreach ($order as $key => $v) {?>
                       <tr>
-                        <td><?php echo $key+1;?></td>
-                        <td>RM <?php echo $value['amount'];?></td>
-                        <td><?php echo $value['expire_date'];?></td>
-                        <td><?php echo $value['create_date'];?></td>
+                        <td><?= $key+1;?></td>
+                        <td>RM <?= $v['amount'];?></td>
+                        <td><?= $v['description'];?></td>
+                        <td><?= $v['expire_date'];?></td>
+                        <td><?= $v['create_date'];?></td>
                         <td>
                           <?php 
 
-                          $admin_info = get_admin($value['admin_id']);
+                          $admin_info = get_admin($v['admin_id']);
                           echo $admin_info['username'];
 
                           ?>
