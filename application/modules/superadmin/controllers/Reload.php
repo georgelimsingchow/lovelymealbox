@@ -20,7 +20,6 @@ class Reload extends Admin_Controller
 
 	public function add_balance()
 	{
-		$submit = $this->input->post('submit',TRUE);
 		
 		$customer_id = $this->input->get('customer_id');
 
