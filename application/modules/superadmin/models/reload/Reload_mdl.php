@@ -28,6 +28,23 @@ class Reload_mdl extends CI_Model {
 		return $data;
 	}
 
+	function get_remaining($customer_id)
+	{
+		$table = $this->get_table();
+		$data = array();
+
+		$this->db->select('SUM(amount) as total');
+		$this->db->from($table);
+		$this->db->where("customer_id", $customer_id);
+		$query = $this->db->get();
+
+		foreach ($query->result_array() as $row) {
+			$data = $row;
+		}
+		return $data['total'];	
+
+	}
+
 	function get_total_reload($customer_id)
 	{
 		$table = $this->get_table();

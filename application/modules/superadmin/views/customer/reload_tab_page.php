@@ -4,7 +4,7 @@
       <!-- small box -->
       <div class="small-box bg-aqua">
         <div class="inner">
-          <h3><?php echo $this->reload->get_total_reload($customer_id) ? $this->reload->get_total_reload($customer_id) : "0"; ?></h3>
+          <h3><?= $this->reload->get_total_reload($customer_id) ? $this->reload->get_total_reload($customer_id) : "0"; ?></h3>
           <p>Total Reload</p>
         </div>
         <div class="icon">
@@ -16,7 +16,7 @@
       <!-- small box -->
       <div class="small-box bg-aqua">
         <div class="inner">
-          <h3><?php echo $this->reload->get_remaining($customer_id) ? $this->reload->get_remaining($customer_id) : "0"; ?></h3>
+          <h3><?= $this->reload->get_remaining($customer_id) ? $this->reload->get_remaining($customer_id) : "0"; ?></h3>
           <p>Remaining Reload</p>
         </div>
         <div class="icon">
