@@ -22,7 +22,6 @@
             <div class="row">
             <div class="col-md-12">
                   <div id="owl-example1" class="owl-carousel">
-                  <div><img src="<?php echo base_url();?>assets/images/lucky-draw2.jpg" class="img-responsive"></div>
                   <div><img src="<?php echo base_url();?>assets/images/alacarte.jpg" class="img-responsive"></div>
                   <div><img src="<?php echo base_url();?>assets/images/package.jpg" class="img-responsive"></div>             
                 </div>
