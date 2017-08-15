@@ -179,8 +179,6 @@ class Dailymenu extends MX_Controller
 		$data = $this->dailymenu->json_get_cart_data($date,$session);
 
 		echo json_encode($data);
-
-
 	}
-
+	
 }
