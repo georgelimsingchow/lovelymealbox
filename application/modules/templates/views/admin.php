@@ -40,7 +40,7 @@
 
         <?php $add_box = $this->uri->segment(3);  ?>
 
-    <?php if (($add_box == 'add_box') || ($add_box == 'order_cater_detail')): ?>
+    <?php if (($add_box == 'add_box') || ($add_box == 'order_cater_detail') ||($add_box == 'edit_balance')): ?>
       <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular.min.js"></script>
     <?php endif ?>
 

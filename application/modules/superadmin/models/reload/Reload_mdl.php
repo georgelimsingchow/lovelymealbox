@@ -12,6 +12,24 @@ class Reload_mdl extends CI_Model {
 		return $table;
 	}
 
+	function find_by_id($balance_id)
+	{
+		return $this->db->where('balance_id',$balance_id)->limit(1)->get('balance')->row();
+	}
+
+	function edit($balance_id,$data = array())
+	{
+
+		$this->db->where('balance_id', $balance_id);
+		$this->db->update('balance', $data);
+
+		if($this->db->affected_rows() >=0){
+		  return true; //add your code here
+		}else{
+		  return false; //add your your code here
+		}
+	}
+
 	function get_customer_balance($customer_id)
 	{
 		$table = $this->get_table();

@@ -31,7 +31,7 @@ class Reload extends Admin_Controller
 				$insert_data = $this->reload_fetch_from_post();
 				$this->db->insert('balance', $insert_data);
 
-				redirect('superadmin/reload/add_balance/'.$customer_id);
+				redirect('superadmin/reload/add_balance'.$customer_id);
 				
 
 			}else{
@@ -47,8 +47,34 @@ class Reload extends Admin_Controller
 				$data['view_file']      = "reload_add_page";
 				$this->load->module("templates");
 				$this->templates->admin($data);	
-			}
-	
+			}	
+	}
+
+	public function edit_balance()
+	{
+		$reload_id = $this->input->get('reload_id');
+		$customer_id = $this->input->get('customer_id');
+		$data['customer_name'] = $this->get_customer_name($customer_id);
+		$data['view_module']    = "superadmin";
+		$data['view_file']      = "reload_edit_page";
+		$this->load->module("templates");
+		$this->templates->admin($data);	
+	}
+
+	public function json_do_edit_balance()
+	{
+		$balance_id = $this->input->post('balance_id');
+		$data['amount'] = $this->input->post('amount');
+		$data['real_amount'] = $this->input->post('real_amount');
+		$data['description'] = $this->input->post('description');
+
+		$edit = $this->reload->edit($balance_id,$data);
+
+		if ($edit) {
+			echo json_encode(['status'=>'success']);exit;
+		}else{
+			echo json_encode(['status'=>'fail']);exit;
+		}
 	}
 
 

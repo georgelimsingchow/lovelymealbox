@@ -75,7 +75,7 @@
                   <h3 class="box-title">Customer Reload</h3>
                 </div><!-- /.box-header -->
                 <!-- form start -->
-                <form role="form" action="<?php echo base_url();?>superadmin/reload/add_balance/<?php echo $customer_data['customer_id'];?>" method="POST">
+                <form role="form" action="<?php echo base_url();?>superadmin/reload/add_balance?customer_id=<?= $customer_data['customer_id'];?>" method="POST">
                   <input type="hidden" name="admin_id" value="<?php echo $admin['admin_id'];?>" />
                   <div class="box-body">
                     <div class="form-group">
@@ -122,27 +122,26 @@
                   <table class="table table-bordered">
                     <tbody><tr>
                       <th style="width: 10px">#</th>
-                      <th>Reload Amount</th>
+                      <th>Amount</th>
                       <th>Description</th>
-                      <th>Expire Date</th>
-                      <th>Create Date</th>
-                      <th>Reload By</th>
+                      <th>Date</th>
+                      <th>Action</th>
                     </tr>
                     <?php foreach ($order as $key => $v) {?>
                       <tr>
                         <td><?= $key+1;?></td>
-                        <td>RM <?= $v['amount'];?></td>
-                        <td><?= $v['description'];?></td>
-                        <td><?= $v['expire_date'];?></td>
-                        <td><?= $v['create_date'];?></td>
                         <td>
-                          <?php 
-
-                          $admin_info = get_admin($v['admin_id']);
-                          echo $admin_info['username'];
-
-                          ?>
+                          Reload : <?= $v['amount'];?><br>
+                          Actual :  <?= $v['real_amount'];?>
+                          </td>
+                        <td><?= $v['description'];?></td>
+                        <td>
+                          Expire : <?= $v['expire_date'];?><br>
+                          Create : <?= $v['create_date'];?>
                         </td>
+
+                        <td>
+                          <a href="<?= base_url();?>superadmin/reload/edit_balance?reload_id=<?= $v['balance_id'];?>&customer_id=<?= $v['customer_id']?>" class="btn btn-danger">Edit</a></td>
                       </tr>
                     <?php }?>
 
