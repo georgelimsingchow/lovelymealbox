@@ -27,27 +27,27 @@ class Reload extends Admin_Controller
 		$this->form_validation->set_rules('amount', 'Reload amount', 'required|is_numeric');
 		$this->form_validation->set_rules('description', 'Description', 'required');
 
-			if ($this->form_validation->run() == TRUE){
-				$insert_data = $this->reload_fetch_from_post();
-				$this->db->insert('balance', $insert_data);
+		if ($this->form_validation->run() == TRUE){
+			$insert_data = $this->reload_fetch_from_post();
+			$this->db->insert('balance', $insert_data);
 
-				redirect('superadmin/reload/add_balance'.$customer_id);
-				
+			redirect('superadmin/reload/add_balance?customer_id='.$customer_id);
+			
 
-			}else{
+		}else{
 
-				$data['customer_reload']= $this->reload->get_total_reload($customer_id);
-				$data['customer_real_reload'] = $this->reload->get_total_real_reload($customer_id);
-				$data['customer_used']= $this->reload->get_total_used($customer_id);
-				$admin_id               = $this->session->admin_id;
-				$data['admin']    		= get_admin($admin_id);
-				$data['order']    		= $this->_getOrder($customer_id);
-				$data['customer_data']  = $this->_getSingleCustomer($customer_id);
-				$data['view_module']    = "superadmin";
-				$data['view_file']      = "reload_add_page";
-				$this->load->module("templates");
-				$this->templates->admin($data);	
-			}	
+			$data['customer_reload']= $this->reload->get_total_reload($customer_id);
+			$data['customer_real_reload'] = $this->reload->get_total_real_reload($customer_id);
+			$data['customer_used']= $this->reload->get_total_used($customer_id);
+			$admin_id               = $this->session->admin_id;
+			$data['admin']    		= get_admin($admin_id);
+			$data['order']    		= $this->_getOrder($customer_id);
+			$data['customer_data']  = $this->_getSingleCustomer($customer_id);
+			$data['view_module']    = "superadmin";
+			$data['view_file']      = "reload_add_page";
+			$this->load->module("templates");
+			$this->templates->admin($data);	
+		}	
 	}
 
 	public function edit_balance()
