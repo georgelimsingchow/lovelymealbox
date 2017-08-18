@@ -223,6 +223,9 @@
             <!-- FOOD MENU -->
             <li class="<?php if($this->uri->segment(2) == 'foodmenu'){ echo "active";}else{ echo "";} ;?>"><a href="<?php echo base_url();?>superadmin/foodmenu"><i class="fa fa-cutlery"></i> <span>Manage Food Menu</span></a></li>
 
+            <!-- FOOD MENU -->
+            <li class="<?php if($this->uri->segment(2) == 'alacarte'){ echo "active";}else{ echo "";} ;?>"><a href="<?php echo base_url();?>superadmin/alacarte"><i class="fa fa-cutlery"></i> <span>Manage Alacarte</span></a></li>
+
             <!-- DAILY MENU -->
             <li class="<?php if($this->uri->segment(2) == 'dailymenu'){ echo "active";}else{ echo "";} ;?>"><a href="<?php echo base_url();?>superadmin/dailymenu"><i class="fa fa-cutlery"></i> <span>Manage Daily Menu</span></a></li>
 
