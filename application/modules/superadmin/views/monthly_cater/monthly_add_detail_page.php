@@ -41,7 +41,7 @@
                 <?php $session = json_decode($v['session'],TRUE); ?>
                     <?= implode(" , ", $session); ?>                   
                 </td>
-                <td><?= $v['quantity']?></td>         
+                <td><?= $v['credit']?></td>         
                 <td><?= $v['comment']?></td>
               </tr>
             <?php  }?>
@@ -74,9 +74,22 @@
                   <div class="input-group-addon">
                     <i class="fa fa-calendar"></i>
                   </div>
-                  <input type="text" class="form-control pull-right" id="startDate" name="start_date" value="<?php echo set_value('start_date')?>">
+                  <input type="text" class="form-control pull-right" id="startDate" name="start_date" value="<?= set_value('start_date')?>">
                 </div>
                 <?php echo form_error('start_date', '<span class="help-block error-red">', '</span>'); ?>
+              </div>
+                <!-- /.input group -->
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">End Date:</label>
+              <div class="col-sm-6">
+                <div class="input-group date">
+                  <div class="input-group-addon">
+                    <i class="fa fa-calendar"></i>
+                  </div>
+                  <input type="text" class="form-control pull-right" id="endDate" name="end_date" value="<?= set_value('end_date')?>">
+                </div>
+                <?php echo form_error('end_date', '<span class="help-block error-red">', '</span>'); ?>
               </div>
                 <!-- /.input group -->
               </div>

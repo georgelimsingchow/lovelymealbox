@@ -86,6 +86,7 @@ $cater_url = base_url('superadmin/monthly_cater/json_get_cater')."/".$cater_id;
             </table>
           </div><!-- /.box-body -->
           <div class="box-footer">
+              <a href="<?= current_url();?>?id=<?= $this->input->get('id'); ?>" class="btn btn-primary">RESET</a>
               <button type="submit" class="btn btn-danger pull-right" ng-disabled="!valid">ADD</button>
           </div>
           </form>
@@ -120,7 +121,7 @@ $cater_url = base_url('superadmin/monthly_cater/json_get_cater')."/".$cater_id;
                 <td class="text-center">{{k.cater_id}}</td>
                 <td>{{k.menu_date}}</td>
                 <td>{{k.picked_menu}}</td>
-                <td>{{k.quantity}}</td>
+                <td>{{k.credit}}</td>
                 <td>{{k.session}}</td>
                 <td>{{k.order_status}}</td>
               </tr>              

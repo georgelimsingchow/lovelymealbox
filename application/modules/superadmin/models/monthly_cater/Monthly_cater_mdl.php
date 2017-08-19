@@ -13,6 +13,49 @@ class Monthly_cater_mdl extends CI_Model {
 		return $table_name;
 	}
 
+	public function count_status($status)
+	{
+		return  $this->db->where('status', $status)->from('cater')->count_all_results();		
+	}
+
+	public function get_cater_total_reload($id)
+	{
+		$data = array();
+
+		$this->db->select('SUM(fee) as total_fee, SUM(credit) as total_credit');
+		$this->db->from('cater_detail');
+		$this->db->where('cater_id', $id);
+		$query = $this->db->get();
+
+		foreach ($query->result_array() as $row) {
+			$data = $row;
+		}
+
+		return $data;		
+	}
+
+	public function get_cater_total_spent($id)
+	{
+		$data = array();
+
+		$this->db->select('SUM(credit) as total_credit');
+		$this->db->from('cater_order');
+		$this->db->where('cater_id', $id);
+		$names = array('paid', 'delivered');
+		$this->db->where_in('order_status', $names);
+		$query = $this->db->get();
+
+		foreach ($query->result_array() as $row) {
+			$data = $row;
+		}
+
+		return $data;	
+
+
+
+
+	}
+
 	public function get_cater()
 	{
 		$table = $this->get_table();

@@ -18,12 +18,16 @@ class Monthly_cater extends MX_Controller
 
 	public function index()
 	{
+		$data['count_active_cater']  = $this->mcater->count_status('1');
+		$data['count_inactive_cater'] = $this->mcater->count_status('0');
 		$data['cater_data'] = $this->mcater->get_cater();
 		$data['view_module'] = "superadmin";
 		$data['view_file'] = "monthly_cater/monthly_cater_page";
 		$this->load->module("templates");
 		$this->templates->admin($data);
 	}
+
+
 
 	public function add_cater()
 	{
@@ -72,6 +76,7 @@ class Monthly_cater extends MX_Controller
 		$id = $this->input->get('id');
 
 		$start_date =  $this->input->post('start_date'); // ok
+		$end_date =  $this->input->post('end_date'); // ok
 		$day_range  =  json_encode($this->input->post('day')); // ok
 		$session    =  json_encode($this->input->post('session')); // ok
 		$qty        =  $this->input->post('qty');
@@ -80,6 +85,7 @@ class Monthly_cater extends MX_Controller
 		$comment    =  $this->input->post('comment');
 
 		$this->form_validation->set_rules('start_date', 'Start Date', 'required');
+		$this->form_validation->set_rules('end_date', 'End Date', 'required');
 		$this->form_validation->set_rules('day[]', 'Day', 'required'); 
 		$this->form_validation->set_rules('session[]', 'Session', 'required'); 
 		$this->form_validation->set_rules('qty', 'Quantity', 'required|integer'); 
@@ -99,9 +105,10 @@ class Monthly_cater extends MX_Controller
 	    	$insert_data = array(
 	    		'cater_id'    => $id,
 	    		'start_date'  => $start_date,
+	    		'end_date'     => $end_date,
 	    		'day_range'   => $day_range,
 	    		'session'     => $session,
-	    		'quantity'    => $qty,
+	    		'credit'      => $qty,
  	    		'pax'         => $pax,
 	    		'fee'         => $fee,	    		
 	    		'comment'     => $comment,
@@ -135,7 +142,7 @@ class Monthly_cater extends MX_Controller
 		$insertCater['cater_id'] = $input_obj->cater_id;
 		$insertCater['picked_menu'] = json_encode($input_obj->selected_menu);
 		$insertCater['session'] = $input_obj->session;
-		$insertCater['quantity'] = '1';
+		$insertCater['credit'] = '1';
 		$insertCater['order_status'] = 'paid';
 		$insertCater['create_date'] = date('Y-m-d H:i:s');
 
